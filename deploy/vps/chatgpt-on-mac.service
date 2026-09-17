@@ -1,0 +1,40 @@
+[Unit]
+Description=ChatGPT on Mac — HTTPS 到 SSH 的桥接服务
+Documentation=https://github.com/
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=cgm
+Group=cgm
+WorkingDirectory=/opt/chatgpt-on-mac
+EnvironmentFile=/opt/chatgpt-on-mac/.env
+ExecStart=/usr/bin/node dist/server.js
+
+Restart=always
+RestartSec=3
+# 起不来时别无限快速重启刷爆日志
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=cgm
+
+# ── 进程收敛：这个服务只需要发起网络连接和读自己的目录 ──
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+# 只有这两个目录可写：日志、以及 SSH 私钥所在的配置目录
+ReadWritePaths=/opt/chatgpt-on-mac/logs
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictRealtime=true
+LockPersonality=true
+
+[Install]
+WantedBy=multi-user.target
