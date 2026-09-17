@@ -22,9 +22,15 @@ Claude Code、Codex CLI 这类工具很好用，但额度烧得飞快。用完�
 **这个项目就是把两者接起来**：让网页版的 ChatGPT 能够真正操作你的电脑 ——
 读代码、改文件、跑测试、装依赖、看日志，就像你自己在终端里敲一样。
 
+![在 ChatGPT 网页端列出本机目录](docs/images/02-chatgpt-web-cropped.jpg)
+
+这是在 ChatGPT 网页里问「帮我看下 coedex 目录下有哪些目录」，
+它真的去那台 Mac 上跑了一遍 —— `Worked for 4s` 是它调用工具的耗时，
+下面列出来的是那台电脑上真实存在的目录。
+
 ![ChatGPT 在本机写文件](docs/images/03-chatgpt-writes-file.jpg)
 
-上图是它在执行「建目录 + 写文件」，返回的路径是真实存在于那台 Mac 上的。
+这张是它在执行「建目录 + 写文件」，返回的路径真实存在于那台 Mac 上。
 
 ---
 
@@ -202,8 +208,6 @@ curl -s https://mac.你的域名.com/health
    - Auth Type 选 **Bearer** ← **这里选错会一直报 401**
 8. **Privacy policy** 随便填个能打开的网址（ChatGPT 强制要求），填 `https://mac.你的域名.com/health` 就行
 9. 右上角 **Create** → 选 **Only me** → 保存
-
-![在 ChatGPT 网页里调用](docs/images/02-chatgpt-web-cropped.jpg)
 
 完成后，直接跟它说话就行：
 
